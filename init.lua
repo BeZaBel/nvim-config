@@ -212,6 +212,7 @@ require('lazy').setup({
   'jalvesaq/Nvim-R',
   'KeitaNakamura/tex-conceal.vim',
   'frabjous/knap',
+  'jiangmiao/auto-pairs',
 
 }, {})
 
