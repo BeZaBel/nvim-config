@@ -608,11 +608,13 @@ require("nvim-tree").setup{
   },
 }
 
+local open_side_tree = vim.api.nvim_create_augroup('openNvimTree', { clear = true })
 vim.api.nvim_create_autocmd( 'VimEnter', {
   callback = function()
     require('nvim-tree.api').tree.open()
-  end
-  })
+  end,
+  group = open_side_tree,
+})
 
 local function tab_win_closed(winnr)
   local api = require"nvim-tree.api"
@@ -761,6 +763,7 @@ vim.api.nvim_create_autocmd('BufUnload', {
     end
   end,
   group = close_server,
+  pattern = "*.md"
 })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
