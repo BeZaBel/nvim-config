@@ -85,14 +85,12 @@ require('lazy').setup({
   },
 
   { -- catppuccin
-    'rebelot/kanagawa.nvim', name = "kanagawa",
-  },
-
-  { -- duskfox
-    'EdenEast/nightfox.nvim', name = "duskfox",
-    priority = 1000,
+    'catppuccin/nvim', name = "catppuccin",
     config = function()
-      vim.cmd.colorscheme("duskfox")
+      require("catppuccin").setup({
+        flavour = "macchiato",
+      })
+      vim.cmd.colorscheme("catppuccin")
     end,
   },
 
@@ -213,7 +211,7 @@ require('lazy').setup({
   'lervag/vimtex',
   'SirVer/ultisnips',
   'karb94/neoscroll.nvim',
---  'xiyaowong/nvim-transparent',
+  -- 'xiyaowong/nvim-transparent',
   'akinsho/bufferline.nvim',
   'jalvesaq/Nvim-R',
   'KeitaNakamura/tex-conceal.vim',
