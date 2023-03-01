@@ -201,6 +201,12 @@ require('lazy').setup({
     end,
   },
 
+  {'m4xshen/autoclose.nvim',
+    config = function()
+      require('autoclose').setup()
+    end,
+  },
+
   -- No config needed
   'nvim-tree/nvim-web-devicons',
   'nvim-tree/nvim-tree.lua',
@@ -212,7 +218,6 @@ require('lazy').setup({
   'jalvesaq/Nvim-R',
   'KeitaNakamura/tex-conceal.vim',
   'frabjous/knap',
-  'jiangmiao/auto-pairs',
 
 }, {})
 
