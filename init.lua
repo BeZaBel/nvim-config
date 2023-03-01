@@ -195,16 +195,16 @@ require('lazy').setup({
     end,
   },
 
-  { 'petertriho/nvim-scrollbar',
-    config = function()
-      require('scrollbar').setup()
-    end,
-  },
-
   {'m4xshen/autoclose.nvim',
     config = function()
       require('autoclose').setup()
     end,
+  },
+
+  { 'echasnovski/mini.nvim', version = false,
+  config = function ()
+    require('mini.map').setup()
+  end,
   },
 
   -- No config needed
@@ -218,6 +218,7 @@ require('lazy').setup({
   'jalvesaq/Nvim-R',
   'KeitaNakamura/tex-conceal.vim',
   'frabjous/knap',
+  'folke/tokyonight.nvim',
 
 }, {})
 
@@ -322,9 +323,17 @@ vim.keymap.set({ 'n', 'v' }, '<leader><F8>', function() require("knap").forward_
 
 -- Splits
 
-vim.keymap.set( {'n', 'v' }, '<leader>wv', ':vsplit<CR>', { desc = 'Open vertical split' } )
-vim.keymap.set( {'n', 'v' }, '<leader>wc', ':split<CR>', { desc = 'Open horizontal split' } )
+vim.keymap.set( { 'n', 'v' }, '<leader>wv', ':vsplit<CR>', { desc = 'Open vertical split' } )
+vim.keymap.set( { 'n', 'v' }, '<leader>wc', ':split<CR>', { desc = 'Open horizontal split' } )
 
+-- Mini map
+
+vim.keymap.set( { 'n', 'v' }, '<leader>mc', MiniMap.close, { desc = 'Close mini.map' } )
+vim.keymap.set( { 'n', 'v' }, '<leader>mf', MiniMap.toggle_focus, { desc = 'Focus mini.map' } )
+vim.keymap.set( { 'n', 'v' }, '<leader>mo', MiniMap.open, { desc = 'Open mini.map' } )
+vim.keymap.set( { 'n', 'v' }, '<leader>mr', MiniMap.refresh, { desc = 'Refresh mini.map' } )
+vim.keymap.set( { 'n', 'v' }, '<leader>ms', MiniMap.toggle_side, { desc = 'Toggle side of mini.map' } )
+vim.keymap.set( { 'n', 'v' }, '<leader>mm', MiniMap.toggle, { desc = 'Toggle mini.map' } )
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -769,151 +778,6 @@ vim.api.nvim_create_autocmd('BufUnload', {
   end,
   group = close_server,
   pattern = "*.md"
-})
-
--- Scrollbar stuff
-
-require("scrollbar").setup({
-    show = true,
-    show_in_active_only = false,
-    set_highlights = true,
-    folds = 1000, -- handle folds, set to number to disable folds if no. of lines in buffer exceeds this
-    max_lines = false, -- disables if no. of lines in buffer exceeds this
-    hide_if_all_visible = false, -- Hides everything if all lines are visible
-    throttle_ms = 100,
-    handle = {
-        text = " ",
-        color = nil,
-        color_nr = nil, -- cterm
-        highlight = "CursorColumn",
-        hide_if_all_visible = true, -- Hides handle if all lines are visible
-    },
-    marks = {
-        Cursor = {
-            text = "•",
-            priority = 0,
-            gui=nil,
-            color = nil,
-            cterm=nil,
-            color_nr = nil, -- cterm
-            highlight = "Normal",
-        },
-        Search = {
-            text = { "-", "=" },
-            priority = 1,
-            gui=nil,
-            color = nil,
-            cterm=nil,
-            color_nr = nil, -- cterm
-            highlight = "Search",
-        },
-        Error = {
-            text = { "-", "=" },
-            priority = 2,
-            gui=nil,
-            color = nil,
-            cterm=nil,
-            color_nr = nil, -- cterm
-            highlight = "DiagnosticVirtualTextError",
-        },
-        Warn = {
-            text = { "-", "=" },
-            priority = 3,
-            gui=nil,
-            color = nil,
-            cterm=nil,
-            color_nr = nil, -- cterm
-            highlight = "DiagnosticVirtualTextWarn",
-        },
-        Info = {
-            text = { "-", "=" },
-            priority = 4,
-            gui=nil,
-            color = nil,
-            cterm=nil,
-            color_nr = nil, -- cterm
-            highlight = "DiagnosticVirtualTextInfo",
-        },
-        Hint = {
-            text = { "-", "=" },
-            priority = 5,
-            gui=nil,
-            color = nil,
-            cterm=nil,
-            color_nr = nil, -- cterm
-            highlight = "DiagnosticVirtualTextHint",
-        },
-        Misc = {
-            text = { "-", "=" },
-            priority = 6,
-            gui=nil,
-            color = nil,
-            cterm=nil,
-            color_nr = nil, -- cterm
-            highlight = "Normal",
-        },
-        GitAdd = {
-            text = "┆",
-            priority = 7,
-            gui=nil,
-            color = nil,
-            cterm=nil,
-            color_nr = nil, -- cterm
-            highlight = "GitSignsAdd",
-        },
-        GitChange = {
-            text = "┆",
-            priority = 7,
-            gui=nil,
-            color = nil,
-            cterm=nil,
-            color_nr = nil, -- cterm
-            highlight = "GitSignsChange",
-        },
-        GitDelete = {
-            text = "▁",
-            priority = 7,
-            gui=nil,
-            color = nil,
-            cterm=nil,
-            color_nr = nil, -- cterm
-            highlight = "GitSignsDelete",
-        },
-    },
-    excluded_buftypes = {
-        "terminal",
-    },
-    excluded_filetypes = {
-        "prompt",
-        "TelescopePrompt",
-        "noice",
-    },
-    autocmd = {
-        render = {
-            "BufWinEnter",
-            "TabEnter",
-            "TermEnter",
-            "WinEnter",
-            "CmdwinLeave",
-            "TextChanged",
-            "VimResized",
-            "WinScrolled",
-        },
-        clear = {
-            "BufWinLeave",
-            "TabLeave",
-            "TermLeave",
-            "WinLeave",
-        },
-    },
-    handlers = {
-        cursor = true,
-        diagnostic = true,
-        gitsigns = false, -- Requires gitsigns
-        handle = true,
-        search = false, -- Requires hlslens
-        ale = false, -- Requires ALE
-    },
 })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
