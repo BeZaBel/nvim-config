@@ -213,7 +213,7 @@ require('lazy').setup({
   'lervag/vimtex',
   'SirVer/ultisnips',
   'karb94/neoscroll.nvim',
-  'xiyaowong/nvim-transparent',
+--  'xiyaowong/nvim-transparent',
   'akinsho/bufferline.nvim',
   'jalvesaq/Nvim-R',
   'KeitaNakamura/tex-conceal.vim',
@@ -702,7 +702,7 @@ require('bufferline').setup{
         show_duplicate_prefix = true,
         persist_buffer_sort = true,
         -- 'slant', 'thick', 'thin'
-        separator_style = 'thin',
+        separator_style = 'slope',
         enforce_regular_tabs = true,
         always_show_bufferline = true,
         hover = {
@@ -712,27 +712,27 @@ require('bufferline').setup{
         },
         -- insert_after_current, insert_at_end, 'id',
         -- 'extension', 'relative_directory', 'tabs'
-        sort_by = 'insert_at_end'
+        sort_by = 'tabs'
     }
 }
 
 -- nvim transparent
 
-require("transparent").setup({
-  enable = true, -- boolean: enable transparent
-  extra_groups = { -- table/string: additional groups that should be cleared
-    -- In particular, when you set it to 'all', that means all available groups
-
-    -- example of akinsho/nvim-bufferline.lua
-    "BufferLineTabClose",
-    "BufferlineBufferSelected",
-    "BufferLineFill",
-    "BufferLineBackground",
-    "BufferLineSeparator",
-    "BufferLineIndicatorSelected",
-  },
-  exclude = {}, -- table: groups you don't want to clear
-})
+-- require("transparent").setup({
+--   enable = true, -- boolean: enable transparent
+--   extra_groups = { -- table/string: additional groups that should be cleared
+--     -- In particular, when you set it to 'all', that means all available groups
+--
+--     -- example of akinsho/nvim-bufferline.lua
+--     "BufferLineTabClose",
+--     "BufferlineBufferSelected",
+--     "BufferLineFill",
+--     "BufferLineBackground",
+--     "BufferLineSeparator",
+--     "BufferLineIndicatorSelected",
+--   },
+--   exclude = {}, -- table: groups you don't want to clear
+-- })
 
 -- toggleterm setup
 
