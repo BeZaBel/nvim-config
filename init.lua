@@ -68,6 +68,8 @@ require('lazy').setup({
     dependencies = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
   },
 
+  {'hrsh7th/cmp-path'},
+
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim', opts = {} },
   { -- Adds git releated signs to the gutter, as well as utilities for managing changes
@@ -86,13 +88,19 @@ require('lazy').setup({
 
   { -- catppuccin
     'catppuccin/nvim', name = "catppuccin",
-    config = function()
-      require("catppuccin").setup({
-        flavour = "macchiato",
-      })
-      vim.cmd.colorscheme("catppuccin")
-    end,
+    -- config = function()
+    --   require("catppuccin").setup({
+    --     flavour = "macchiato",
+    --   })
+    --   vim.cmd.colorscheme("catppuccin")
+    -- end,
   },
+
+  { "NTBBloodbath/sweetie.nvim", name = "sweetie",
+    config = function()
+      require("sweetie").setup()
+      vim.cmd.colorscheme("sweetie")
+    end},
 
   { -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
@@ -199,7 +207,7 @@ require('lazy').setup({
     end,
   },
 
-  { 'echasnovski/mini.nvim', version = false,
+  { 'echasnovski/mini.nvim',
   config = function ()
     require('mini.map').setup()
   end,
@@ -269,7 +277,7 @@ vim.o.termguicolors = true
 
 -- Vimtex configs
 
-vim.g.vimtex_view_general_viewer = 'llpp'
+vim.g.vimtex_view_general_viewer = 'zathura'
 vim.g.vimtex_compiler_method = 'tectonic'
 vim.o.conceallevel = 1
 vim.g.tex_conceal = 'adbmg'
@@ -591,6 +599,7 @@ cmp.setup {
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
+    { name = 'path' },
   },
 }
 
