@@ -96,11 +96,24 @@ require('lazy').setup({
     -- end,
   },
 
+  {
+    'marko-cerovac/material.nvim',
+    config = function ()
+      require('material').setup({
+        plugins = {"indent-blankline",},
+        lualine_style = 'default',
+      })
+      vim.g.material_style = 'palenight'
+      vim.cmd.colorscheme('material')
+    end,
+  },
+
   { "NTBBloodbath/sweetie.nvim", name = "sweetie",
-    config = function()
-      require("sweetie").setup()
-      vim.cmd.colorscheme("sweetie")
-    end},
+    -- config = function()
+    --   require("sweetie").setup()
+    --   vim.cmd.colorscheme("sweetie")
+    -- end
+  },
 
   { -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
@@ -108,7 +121,7 @@ require('lazy').setup({
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'onedark',
+        theme = 'material',
         component_separators = '|',
         section_separators = '',
       },
@@ -597,9 +610,9 @@ cmp.setup {
     end, { 'i', 's' }),
   },
   sources = {
-    { name = 'nvim_lsp' },
     { name = 'luasnip' },
     { name = 'path' },
+    { name = 'nvim_lsp' },
   },
 }
 
